@@ -1,0 +1,6 @@
+[
+    {
+        "contract": "DevHawk.Contracts.ApocToken",
+        "operation": "enablePayment"
+    }
+]

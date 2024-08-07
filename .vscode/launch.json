@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "deploy",
+            "type": "neo-contract",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/bin/sc/ApocToken.nef",
+            "neo-express": "${workspaceFolder}/default.neo-express",
+            "invocation": "deploy",
+        },
+        {
+            "name": "enable-payment (invoke-file)",
+            "type": "neo-contract",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/bin/sc/ApocToken.nef",
+            "invocation": {
+                "invoke-file": "${workspaceFolder}/invoke-files/enable-payment.neo-invoke.json"
+            }
+        },
+        {
+            "name": "enable-payment",
+            "type": "neo-contract",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/bin/sc/ApocToken.nef",
+            "invocation": {
+                "operation": "enablePayment",
+                "args": []
+            }
+        }
+    ]
+}
