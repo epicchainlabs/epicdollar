@@ -12,17 +12,17 @@ using System.Numerics;
 
 namespace DevHawk.Contracts
 {
-    [DisplayName("ApocToken")]
-    [ManifestExtra("Author", "Harry Pierson")]
-    [ManifestExtra("Email", "harrypierson@hotmail.com")]
-    [ManifestExtra("Description", "This is a NEP17 example")]
-    [SupportedStandards("NEP-17")]
-    [ContractPermission("*", "onNEP17Payment")]
+    [DisplayName("EpicDollar")]
+    [ManifestExtra("Author", "xmoohad")]
+    [ManifestExtra("Email", "xmoohad@epic-chain.org")]
+    [ManifestExtra("Description", "EpicDollar-XUSD-Contracts is an advanced suite of smart contracts meticulously crafted to manage the issuance, transfer, and stability of the EpicDollar (XUSD), a robust stablecoin within the EpicChain blockchain ecosystem")]
+    [SupportedStandards("XEP-17")]
+    [ContractPermission("*", "Crucial component of the EpicDollar-XUSD-Contracts suite, designed to manage and enforce permissions associated with the smart contracts governing the EpicDollar (XUSD)")]
     public class ApocToken : SmartContract
     {
-        const string SYMBOL = "APOC";
+        const string SYMBOL = "XUSD";
         const byte DECIMALS = 8;
-        const long INITIAL_SUPPLY = 1_000_000;
+        const long INITIAL_SUPPLY = 297_846_031_975;
 
         public delegate void OnTransferDelegate(UInt160 from, UInt160 to, BigInteger amount);
 

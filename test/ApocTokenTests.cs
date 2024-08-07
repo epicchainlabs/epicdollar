@@ -15,9 +15,9 @@ namespace ApocTokenTests
     [CheckpointPath("checkpoints/contract-deployed.neoxp-checkpoint")]
     public class ContractDeployedTests : IClassFixture<CheckpointFixture<ContractDeployedTests>>
     {
-        const string SYMBOL = "APOC";
+        const string SYMBOL = "XUSD";
         const byte DECIMALS = 8;
-        const long TOTAL_SUPPLY = 1_000_000_00000000;
+        const long TOTAL_SUPPLY = 989_715_434_00000000;
 
         readonly CheckpointFixture fixture;
         readonly ExpressChain chain;
