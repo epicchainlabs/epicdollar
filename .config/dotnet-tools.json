@@ -2,16 +2,16 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "neo.express": {
-      "version": "3.5.22",
+    "epicchain.express": {
+      "version": "1.0.0",
       "commands": [
-        "neoxp"
+        "epicchainxp"
       ]
     },
-    "neo.compiler.csharp": {
-      "version": "3.5.0",
+    "epicchain.compiler.csharp": {
+      "version": "1.0.0",
       "commands": [
-        "nccs"
+        "xccs"
       ]
     }
   }

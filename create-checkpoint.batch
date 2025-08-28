@@ -1,0 +1,9 @@
+neo-express batch express.batch
+neo-express contract deploy ..\src\core\XUSDToken.cs owen
+neo-express contract deploy ..\src\testing\MockOracle.cs owen
+neo-express contract deploy ..\src\core\Vault.cs owen
+neo-express contract run owen XUSDToken grantRole MINTER_ROLE owen
+neo-express contract run owen XUSDToken grantRole BURNER_ROLE owen
+neo-express contract run owen XUSDToken grantRole MINTER_ROLE Vault
+neo-express contract run owen XUSDToken grantRole BURNER_ROLE Vault
+neo-express checkpoint create checkpoints\contracts-deployed.neoxp-checkpoint

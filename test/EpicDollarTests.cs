@@ -1,19 +1,20 @@
 using System.Numerics;
 using FluentAssertions;
-using Neo;
-using Neo.VM;
+using EpicChain;
+using EpicChain.VM;
 using NeoTestHarness;
 using Xunit;
-using Neo.Assertions;
-using Neo.BlockchainToolkit.SmartContract;
-using Neo.BlockchainToolkit.Models;
-using Neo.BlockchainToolkit;
-using Neo.SmartContract;
+using EpicChain.Assertions;
+using EpicChain.BlockchainToolkit.SmartContract;
+using EpicChain.BlockchainToolkit.Models;
+using EpicChain.BlockchainToolkit;
+using EpicChain.SmartContract;
+using EpicChain.Contracts;
 
-namespace ApocTokenTests
+namespace EpicDollarTests
 {
     [CheckpointPath("checkpoints/contract-deployed.neoxp-checkpoint")]
-    public class ContractDeployedTests : IClassFixture<CheckpointFixture<ContractDeployedTests>>
+    public class EpicDollarTests : IClassFixture<CheckpointFixture<EpicDollarTests>>
     {
         const string SYMBOL = "XUSD";
         const byte DECIMALS = 8;
@@ -22,7 +23,7 @@ namespace ApocTokenTests
         readonly CheckpointFixture fixture;
         readonly ExpressChain chain;
 
-        public ContractDeployedTests(CheckpointFixture<ContractDeployedTests> fixture)
+        public EpicDollarTests(CheckpointFixture<EpicDollarTests> fixture)
         {
             this.fixture = fixture;
             this.chain = fixture.FindChain();
@@ -32,10 +33,10 @@ namespace ApocTokenTests
         public void test_symbol_and_decimals()
         {
             using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract<ApocToken>();
+            var contract = snapshot.GetContract<XUSDToken>();
 
             using var engine = new TestApplicationEngine(snapshot, ProtocolSettings.Default);
-            engine.ExecuteScript<ApocToken>(c => c.symbol(), c => c.decimals());
+            engine.ExecuteScript<XUSDToken>(c => c.symbol(), c => c.decimals());
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(2);
@@ -47,10 +48,10 @@ namespace ApocTokenTests
         public void test_initial_total_supply()
         {
             using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract<ApocToken>();
+            var contract = snapshot.GetContract<XUSDToken>();
 
             using var engine = new TestApplicationEngine(snapshot, ProtocolSettings.Default);
-            engine.ExecuteScript<ApocToken>(c => c.totalSupply());
+            engine.ExecuteScript<XUSDToken>(c => c.totalSupply());
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(1);
@@ -66,10 +67,10 @@ namespace ApocTokenTests
             var account = chain.GetDefaultAccount(accountName).ToScriptHash(chain.AddressVersion);
 
             using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract<ApocToken>();
+            var contract = snapshot.GetContract<XUSDToken>();
 
             using var engine = new TestApplicationEngine(snapshot, settings);
-            engine.ExecuteScript<ApocToken>(c => c.balanceOf(account));
+            engine.ExecuteScript<XUSDToken>(c => c.balanceOf(account));
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(1);
@@ -84,10 +85,10 @@ namespace ApocTokenTests
             var amount = 1000;
 
             using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract<ApocToken>();
+            var contract = snapshot.GetContract<XUSDToken>();
 
             using var engine = new TestApplicationEngine(snapshot, chain.GetProtocolSettings(), sender);
-            engine.ExecuteScript<ApocToken>(c => c.transfer(sender, receiver, amount, null));
+            engine.ExecuteScript<XUSDToken>(c => c.transfer(sender, receiver, amount, null));
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(1);
@@ -96,7 +97,7 @@ namespace ApocTokenTests
             engine.Notifications[0].Should()
                 .BeSentBy(contract);
                 // .And
-                // .BeEquivalentTo<ApocToken.Events>(c => c.Transfer(sender, receiver, amount));
+                // .BeEquivalentTo<XUSDToken.Events>(c => c.Transfer(sender, receiver, amount));
         }
 
         // [Fact]
@@ -107,7 +108,7 @@ namespace ApocTokenTests
 
         //     using var snapshot = fixture.GetSnapshot();
 
-        //     var storages = snapshot.GetContractStorages<ApocToken>();
+        //     var storages = snapshot.GetContractStorages<XUSDToken>();
         //     storages.Should().HaveCount(2);
 
         //     var assets = storages.StorageMap("asset");
